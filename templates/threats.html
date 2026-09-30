@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0">Threat Intelligence</h2>
+        <small class="text-muted">Attacker profiling and active defenses</small>
+    </div>
+    <a href="/report" class="btn btn-outline-info">
+        <i class="bi bi-file-earmark-text me-1"></i> Incident Report
+    </a>
+</div>
+
+<div class="row">
+    <!-- Attacker profiles -->
+    <div class="col-lg-8 mb-4">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-people me-2"></i>Attacker Profiles</span>
+                <span class="text-muted small" id="attacker-count">0 sources</span>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-striped mb-0" id="attackers-table">
+                        <thead>
+                            <tr>
+                                <th>Source IP</th>
+                                <th>Events</th>
+                                <th>Types</th>
+                                <th>Critical</th>
+                                <th>Max Severity</th>
+                                <th>Last Seen</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="attackers-tbody">
+                            <tr><td colspan="8" class="text-center text-muted py-4">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active bans -->
+    <div class="col-lg-4 mb-4">
+        <div class="card h-100 border-danger">
+            <div class="card-header text-danger border-danger d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-shield-slash me-2"></i>Active Bans</span>
+                <span class="badge bg-danger" id="ban-count">0</span>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush" id="bans-list">
+                    <li class="list-group-item bg-transparent text-muted border-secondary">No active bans.</li>
+                </ul>
+            </div>
+            <div class="card-footer bg-transparent border-secondary">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" id="ban-ip" placeholder="IP to ban e.g. 203.0.113.9">
+                    <button class="btn btn-danger" id="ban-btn">Ban</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/threats.js') }}"></script>
+{% endblock %}

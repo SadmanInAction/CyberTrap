@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <h2>Settings</h2>
+    <p class="text-muted"><i class="bi bi-info-circle me-1"></i> Changes take effect on the next system restart (Lab Demo).</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">Service Configuration</div>
+            <div class="card-body">
+                <form id="settings-form">
+                    <h5 class="text-cyan mb-3">SSH Honeypot</h5>
+                    <div class="mb-3 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="ssh-enabled" checked>
+                        <label class="form-check-label" for="ssh-enabled">Enable SSH Service</label>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Port</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="ssh-port" value="2222">
+                        </div>
+                    </div>
+
+                    <hr class="border-secondary">
+                    
+                    <h5 class="text-blue mb-3">HTTP Honeypot</h5>
+                    <div class="mb-3 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="http-enabled" checked>
+                        <label class="form-check-label" for="http-enabled">Enable HTTP Service</label>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Port</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="http-port" value="8080">
+                        </div>
+                    </div>
+                    
+                    <hr class="border-secondary">
+
+                    <h5 class="text-orange mb-3">FTP Honeypot</h5>
+                    <div class="mb-3 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="ftp-enabled" checked>
+                        <label class="form-check-label" for="ftp-enabled">Enable FTP Service</label>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Port</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="ftp-port" value="2121">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Save Service Settings</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card mb-4">
+            <div class="card-header">Alert Configuration</div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">High Severity Alert Threshold</label>
+                    <input type="number" class="form-control" value="50" aria-describedby="alertHelp">
+                    <div id="alertHelp" class="form-text text-muted">Attacks per minute before triggering global alert.</div>
+                </div>
+                <button type="button" class="btn btn-outline-primary">Update Thresholds</button>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">System Status</div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush bg-transparent">
+                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                        SSH Status <span class="badge bg-secondary rounded-pill" id="status-ssh">Checking...</span>
+                    </li>
+                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                        HTTP Status <span class="badge bg-secondary rounded-pill" id="status-http">Checking...</span>
+                    </li>
+                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                        FTP Status <span class="badge bg-secondary rounded-pill" id="status-ftp">Checking...</span>
+                    </li>
+                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                        Uptime <span class="text-muted" id="status-uptime">-</span>
+                    </li>
+                    <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center">
+                        Database Size <span class="text-muted" id="status-db-size">-</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-danger">
+            <div class="card-header text-danger border-danger">Danger Zone</div>
+            <div class="card-body">
+                <p>Clearing logs will permanently delete all recorded attack data.</p>
+                <button type="button" class="btn btn-danger" id="clear-logs-btn">Clear All Logs</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
