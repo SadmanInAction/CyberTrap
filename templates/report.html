@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0">Incident Report</h2>
+        <small class="text-muted">Generated <span id="report-time">-</span> &middot; use Print &rarr; Save as PDF to export</small>
+    </div>
+    <button class="btn btn-outline-info" onclick="window.print()">
+        <i class="bi bi-printer me-1"></i> Print / Save PDF
+    </button>
+</div>
+
+<!-- Summary stats -->
+<div class="row mb-4" id="report-stats">
+    <div class="col-md"><div class="card p-3"><div class="stat-label">Total Attacks</div><div class="stat-number" id="r-total">-</div></div></div>
+    <div class="col-md"><div class="card p-3"><div class="stat-label">Unique Sources</div><div class="stat-number" id="r-ips">-</div></div></div>
+    <div class="col-md"><div class="card p-3"><div class="stat-label">Attacks Today</div><div class="stat-number" id="r-today">-</div></div></div>
+    <div class="col-md"><div class="card p-3"><div class="stat-label">Active Bans</div><div class="stat-number" id="r-bans">-</div></div></div>
+</div>
+
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-header">Severity Breakdown</div>
+            <div class="card-body p-0">
+                <table class="table table-dark mb-0"><tbody id="r-severity"></tbody></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">Top Attackers</div>
+    <div class="card-body p-0">
+        <table class="table table-dark mb-0">
+            <thead>
+                <tr><th>Source IP</th><th>Events</th><th>Types</th><th>Critical</th><th>Max Severity</th><th>First Seen</th><th>Last Seen</th></tr>
+            </thead>
+            <tbody id="r-attackers"></tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/report.js') }}"></script>
+{% endblock %}
