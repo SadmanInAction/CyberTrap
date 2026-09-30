@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Dashboard</h2>
+</div>
+
+<!-- Stats Row -->
+<div class="row mb-4">
+    <div class="col-md">
+        <div class="card stat-card accent-red h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-shield-exclamation stat-icon text-red"></i>
+                <div class="stat-number" id="stat-total">0</div>
+                <div class="stat-label">Total Attacks</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card stat-card accent-blue h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-globe stat-icon text-blue"></i>
+                <div class="stat-number" id="stat-ips">0</div>
+                <div class="stat-label">Unique IPs</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card stat-card accent-orange h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-calendar-event stat-icon text-orange"></i>
+                <div class="stat-number" id="stat-today">0</div>
+                <div class="stat-label">Attacks Today</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card stat-card accent-purple h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-bug stat-icon text-purple"></i>
+                <div class="stat-number fs-4 mt-2" id="stat-top-attack">-</div>
+                <div class="stat-label mt-1">Top Attack Type</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card stat-card accent-green h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-hdd-network stat-icon text-green"></i>
+                <div class="stat-number" id="stat-services">0</div>
+                <div class="stat-label">Active Services</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row -->
+<div class="row mb-4">
+    <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="card h-100">
+            <div class="card-header">Attack Timeline (24h)</div>
+            <div class="card-body">
+                <canvas id="timelineChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="card h-100">
+            <div class="card-header">Attacks by Type</div>
+            <div class="card-body d-flex justify-content-center">
+                <div style="width: 80%">
+                    <canvas id="typeChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-header">Attacks by Service</div>
+            <div class="card-body">
+                <canvas id="serviceChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Live Feed Row -->
+<div class="row">
+    <div class="col-12">
+        <div class="card live-feed-card">
+            <div class="card-header d-flex align-items-center">
+                <div class="pulse-dot me-2"></div> 🔴 Live Attack Feed
+            </div>
+            <div class="card-body p-0">
+                <div id="live-feed" class="live-feed-container">
+                    <!-- Feed items will be inserted here by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
